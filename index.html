@@ -499,11 +499,11 @@
 <script>
   /* ====== DONNÉES ====== */
   const virements = [
-    { date: "15/01/2025", montant: 10,  description: "Aide facture",         icon: "🧾" },
-    { date: "05/02/2025", montant: 23,  description: "Ted's birthday 40 🎉", icon: "🎂" },
-    { date: "05/02/2025", montant: 10,  description: "Ted's birthday 40 🎉", icon: "🎁" },
-    { date: "05/02/2025", montant: 64,  description: "Ted's birthday 40 🎉", icon: "🎉" },
-    { date: "05/02/2025", montant: 3,   description: "Ted's birthday 40 🎉", icon: "🥂" },
+    { date: "15/01/2026", montant: 10,  description: "Aide facture",         icon: "🧾" },
+    { date: "05/02/2026", montant: 23,  description: "Ted's birthday 40 🎉", icon: "🎂" },
+    { date: "05/02/2026", montant: 10,  description: "Ted's birthday 40 🎉", icon: "🎁" },
+    { date: "05/02/2026", montant: 64,  description: "Ted's birthday 40 🎉", icon: "🎉" },
+    { date: "05/02/2026", montant: 3,   description: "Ted's birthday 40 🎉", icon: "🥂" },
     { date: "01/04/2025", montant: 500, description: "Trading 🚀",           icon: "🚀" },
     { date: "11/06/2026", montant: 100, description: "Claude AI Trading",    icon: "🤖" },
     { date: "12/10/2026", montant: 100, description: "Prêt Billy Bank",      icon: "💙", isNew: true },
@@ -523,6 +523,11 @@
   document.getElementById("balance-sub").textContent = `${virements.length} virements · titulaire : Ted`;
   document.getElementById("count").textContent = `${virements.length} opérations`;
 
+  // Tri chronologique
+  virements.sort((a, b) => {
+    const p = d => { const [j,m,an] = d.split("/"); return new Date(an, m-1, j); };
+    return p(a.date) - p(b.date);
+  });
   const groups = {};
   virements.forEach(v => { if (!groups[v.date]) groups[v.date] = []; groups[v.date].push(v); });
   let html = "";
